@@ -36,6 +36,24 @@ class CatStats:
         """
         return f"\n Пол: {self.sex}, Вес: {self.catweight}, Цвет: {self.color}, Возраст: {self.age} (repr)"
 
+    def feed(self, amount: float) -> None:
+        """
+            Метод кормит кошку, увеличивая её вес
+            :param amount: Количество корма в граммах
+        """
+        self.catweight += amount / 1000  # Конвертация граммов в килограммы
+
+    def human_age(self) -> int:
+        """
+            Рассчитывает примерный возраст кошки в человеческих годах
+        """
+        if self.age <= 1:
+            return 15
+        elif self.age == 2:
+            return 24
+        else:
+            return 24 + (self.age - 2) * 4
+
 class PersianCat(CatStats):
     """
         Первый класс, в котором используется наследование из класса CatStats
@@ -78,6 +96,13 @@ class PersianCat(CatStats):
             Которую будет видеть программист. В основном для работы с массой данных.
         """
         return f"\n Порода: {self.breed} {super().__repr__()}"
+
+    def feed(self, amount: float) -> None:
+        """
+            Перегрузка метода кормления
+            Персидские кошки требуют особого подхода к питанию
+        """
+        super().feed(amount * 1.2)
 
 class SphynxCat(CatStats):
     """
